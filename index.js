@@ -1,4 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Funcionalidad del Temporizador Visual ---
+    const timerElement = document.getElementById('timer');
+    const initialTimeInSeconds = 10 * 60; // 10 minutos * 60 segundos/minuto
+    let timeLeft = initialTimeInSeconds;
+    let timerInterval;
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    }
+
+    function updateTimerDisplay() {
+        timerElement.textContent = formatTime(timeLeft);
+        if (timeLeft <= 60) { // Menos de 1 minuto, cambia a rojo
+            timerElement.classList.add('low-time');
+        } else {
+            timerElement.classList.remove('low-time');
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            timerElement.textContent = "00:00";
+            showBannerNotification("¡Tiempo terminado! El desafío ha finalizado.", "info");
+            // Aquí puedes añadir lógica adicional, como deshabilitar botones de envío, etc.
+        }
+    }
+
+    function startTimer() {
+        if (timerElement) {
+            updateTimerDisplay(); // Mostrar el tiempo inicial
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+            }, 1000); // Actualizar cada segundo
+        }
+    }
+
+    startTimer(); // Iniciar el temporizador al cargar la página
+
+
     // Simulación de ejecución de código para el reto del Factorial
     const runCodeButton = document.getElementById('run-code');
     const codeInput = document.getElementById('code-input');
@@ -7,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (runCodeButton && codeInput && codeOutput) {
         runCodeButton.addEventListener('click', () => {
             const userCode = codeInput.value;
-            codeOutput.textContent = 'Salida de su código...\n';
+            codeOutput.textContent = 'Ejecutando su código...\n';
 
             try {
                 const testCases = [0, 1, 5, 7];
@@ -19,13 +60,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     logs.push(args.map(a => String(a)).join(' '));
                 };
 
-                eval(userCode);
+                // Intenta evaluar el código del usuario y buscar la función factorial
+                // Utiliza una función anónima para evitar polución del scope global
+                const codeExecution = new Function(userCode + '; return factorial;');
+                factorial = codeExecution();
 
-                console.log = originalConsoleLog;
+                if (typeof factorial !== 'function') {
+                    // Si no se encuentra la función 'factorial' definida por el usuario, usa la de fallback.
+                    // Esto es por si el usuario borra o cambia el nombre de la función.
+                    factorial = (n) => {
+                        if (n === 0) return 1;
+                        let result = 1;
+                        for (let i = 1; i <= n; i++) {
+                            result *= i;
+                        }
+                        return result;
+                    };
+                    showBannerNotification('No se encontró la función "factorial" en su código. Usando la implementación por defecto para la prueba.', 'info');
+                }
+
+
+                testCases.forEach(num => {
+                    logs.length = 0; // Limpiar logs para cada caso de prueba
+                    const result = factorial(num);
+                    output += `factorial(${num}) = ${result}\n`;
+                    if (logs.length > 0) {
+                        output += `   (console.log: ${logs.join('; ')})\n`;
+                    }
+                });
+
+                codeOutput.textContent = output;
+                console.log = originalConsoleLog; // Restaurar console.log
+                showBannerNotification('Código ejecutado exitosamente. Revisa la salida en la consola.', 'success');
 
             } catch (error) {
                 codeOutput.textContent = `Error de Ejecución: ${error.message}\n${error.stack}`;
-                console.log = originalConsoleLog;
+                console.log = originalConsoleLog; // Restaurar console.log en caso de error
                 showBannerNotification('Ha ocurrido un error al ejecutar su código. Por favor, revise la consola.', 'error');
             }
         });
@@ -72,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedOptionText.includes('Tutor Express')) {
             showFindingTutor();
         } else {
-            showBannerNotification(`Estamos trabajando duro para poder ofrecerte "${selectedOptionText}". Pronto disfrutarás de nuestros servicios.`, 'info');
+            showBannerNotification(`Has seleccionado: "${selectedOptionText}". En una aplicación real, esto abriría la funcionalidad correspondiente.`, 'info');
         }
     }
 
@@ -92,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             name: "Juan Perez",
-            photo:  "https://i.pravatar.cc/150?img=68",
+            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=JP",
             profilePic: "https://i.pravatar.cc/150?img=68", // Una URL de avatar más grande
             expertise: "Algoritmos, Estructuras de Datos, Python",
             bio: "Ingeniero de software con más de 10 años de experiencia en desarrollo back-end. Apasionado por la resolución de problemas complejos y la enseñanza de principios de computación.",
@@ -101,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 2,
             name: "Maria Garcia",
-            photo: "https://i.pravatar.cc/150?img=43",
+            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=MG",
             profilePic: "https://i.pravatar.cc/150?img=43",
             expertise: "Lógica Computacional, C++, Desarrollo Web",
             bio: "Desarrolladora full-stack con experiencia en la industria financiera. Experta en lógica computacional y en la creación de soluciones eficientes. Disfruto guiando a los estudiantes en sus primeros pasos.",
@@ -110,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 3,
             name: "Carlos Sanchez",
-            photo: "https://i.pravatar.cc/150?img=30",
+            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=CS",
             profilePic: "https://i.pravatar.cc/150?img=30",
             expertise: "Bases de Datos, SQL, Arquitectura de Software",
             bio: "Arquitecto de soluciones con un profundo conocimiento en diseño de bases de datos y sistemas distribuidos. Mi objetivo es que comprendas no solo el 'cómo', sino el 'porqué'.",
@@ -119,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 4,
             name: "Ana Lopez",
-            photo: "https://i.pravatar.cc/150?img=25",
+            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=AL",
             profilePic: "https://i.pravatar.cc/150?img=25",
             expertise: "JavaScript, React, Front-end",
             bio: "Diseñadora y desarrolladora front-end con pasión por crear interfaces de usuario intuitivas y responsivas. Me encanta compartir mi conocimiento sobre las últimas tendencias de la web.",
@@ -128,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 5,
             name: "Pedro Ramirez",
-            photo: "https://i.pravatar.cc/150?img=19",
+            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=PR",
             profilePic: "https://i.pravatar.cc/150?img=19",
             expertise: "Inteligencia Artificial, Machine Learning, Java",
             bio: "Investigador en IA y científico de datos. Con experiencia en algoritmos de aprendizaje automático y su aplicación en problemas reales. Te guiaré a través del fascinante mundo de la IA.",
@@ -225,8 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
         chatBody.innerHTML = `
             <div class="chat-main-view">
                 <div class="chat-header-tutor">
+                    <button class="btn-icon back-to-profile-btn"><i class="fas fa-arrow-left"></i></button>
                     <img src="${tutor.photo}" alt="${tutor.name}" class="tutor-chat-photo">
-                    <span class="tutor-name">${tutor.name}</span>
+                    <span>${tutor.name}</span>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message tutor-message">
@@ -245,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const chatMessages = document.getElementById('chatMessages');
         const chatMessageInput = document.getElementById('chatMessageInput');
         const sendMessageBtn = document.getElementById('sendMessageBtn');
-        const backToProfileBtn = document.querySelector('.chat-header-tutor .back-to-profile-btn'); // Especificar para evitar conflictos
+        const backToProfileBtn = document.querySelector('.chat-header-tutor .back-to-profile-btn'); // Especificar para evitar evitar conflictos
 
         backToProfileBtn.addEventListener('click', () => showTutorProfile(tutor));
 
@@ -450,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
             // event.preventDefault(); // Descomentar si quieres evitar que la página se recargue
-            showBannerNotification(`Estamos trabajando duro para poder ofrecerte "${this.textContent.trim()}". Pronto disfrutarás de nuestros servicios.`, 'info');
+            showBannerNotification(`Navegando a: "${this.textContent.trim()}". Esta es una simulación.`, 'info');
         });
     });
 });

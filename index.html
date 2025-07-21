@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Udemy</title>
+    <link rel="stylesheet" href="./index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="site-title">Udemy</h1>
+            <nav class="top-nav">
+                </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav class="main-nav">
+                <ul>
+                    <li class="nav-title">Navegación</li>
+                    <li><a href="#" class="active"><i class="fas fa-puzzle-piece"></i> Reto del Día</a></li>
+                    <li><a href="#"><i class="fas fa-lightbulb"></i> Problemas de Algoritmos</a></li>
+                    <li><a href="#"><i class="fas fa-brain"></i> Lógica Computacional</a></li>
+                    <li><a href="#"><i class="fas fa-terminal"></i> Estructuras de Datos</a></li>
+                    <li><a href="#"><i class="fas fa-video"></i> Videos Explicativos</a></li>
+                    <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Clases Magistrales</a></li>
+                    <li><a href="#"><i class="fas fa-laptop-code"></i> Proyectos Guiados</a></li>
+                    <li class="nav-title">Recursos Adicionales</li>
+                    <li><a href="#"><i class="fas fa-book-open"></i> Guías Teóricas</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Comunidad</a></li>
+                    <li><a href="#"><i class="fas fa-info-circle"></i> Acerca de</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="challenge-section">
+                <article class="challenge-card">
+                    <header class="challenge-header">
+                        <h2>Reto del Día: Calcular el Factorial</h2>
+                        <span class="challenge-difficulty">Dificultad: <span class="difficulty-level easy">Fácil</span></span>
+                    </header>
+                    <div class="challenge-body">
+                        <h3>Descripción del Problema:</h3>
+                        <p>Escribe una función que calcule el factorial de un número entero no negativo 'n'. El factorial de 'n' (representado como n!) es el producto de todos los enteros positivos menores o iguales que 'n'. Por ejemplo, 5! = 5 * 4 * 3 * 2 * 1 = 120.</p>
+
+                        <h3>Ejemplos:</h3>
+                        <pre><code>factorial(0)  // 1
+factorial(1)  // 1
+factorial(5)  // 120
+factorial(7)  // 5040</code></pre>
+
+                        <h3>Consideraciones:</h3>
+                        <ul>
+                            <li>El número de entrada 'n' siempre será un entero no negativo.</li>
+                            <li>Para 'n = 0', el factorial es 1 por definición.</li>
+                        </ul>
+
+                        <div class="code-editor">
+                            <label for="code-input">Tu Código Aquí:</label>
+                            <textarea id="code-input" rows="10" placeholder="function factorial(n) {&#10;  // Escribe tu código aquí&#10;}"></textarea>
+                            <button class="btn btn-primary" id="run-code">Ejecutar Código</button>
+                            <div class="output-console" id="output-console">
+                                <p>Consola de Salida:</p>
+                                <pre id="code-output"></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="challenge-footer">
+                        <button class="btn btn-secondary">Ver Solución (Oculta)</button>
+                        <button class="btn btn-secondary">Marcar como Completado</button>
+                    </footer>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <button id="helpButton" class="floating-button">
+        <i class="fas fa-question-circle"></i> ¿Necesitas Ayuda?
+    </button>
+
+    <div id="chatWindow" class="chat-window hidden">
+        <div class="chat-header">
+            <h3>Centro de Ayuda</h3>
+            <button id="closeChatBtn" class="close-chat-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body">
+            <p>¿En qué podemos ayudarte hoy?</p>
+            <div class="chat-options">
+                <button class="btn chat-option-btn"><i class="fas fa-user-tie"></i> Tutor Express</button>
+                <button class="btn chat-option-btn"><i class="fas fa-book"></i> Preguntas Frecuentes</button>
+                <button class="btn chat-option-btn"><i class="fas fa-comments"></i> Comunidad de Ayuda</button>
+                <button class="btn chat-option-btn"><i class="fas fa-envelope"></i> Contactar Soporte</button>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" placeholder="Escribe tu pregunta aquí...">
+                <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+</html>

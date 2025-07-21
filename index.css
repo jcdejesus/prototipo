@@ -1,0 +1,937 @@
+/* Colores de la paleta de Udemy */
+:root {
+    --udemy-purple: #A435F0;
+    --udemy-dark-text: #1C1D1F;
+    --udemy-light-bg: #F7F9FA;
+    --udemy-medium-gray: #6A6F73;
+    --udemy-white: #FFFFFF;
+    --udemy-green-success: #20A278; /* Para dificultad 'Fácil' */
+    --udemy-orange-medium: #F5B841; /* Para dificultad 'Medio' */
+    --udemy-red-hard: #ED4C5C; /* Para dificultad 'Difícil' */
+}
+
+/* Reset Básico y Fuente */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--udemy-light-bg);
+    color: var(--udemy-dark-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: var(--udemy-dark-text);
+    color: var(--udemy-white);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center; /* Centra el contenido si no hay top-nav */
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-title .fas {
+    color: var(--udemy-purple);
+}
+
+/* Contenedor Principal (sidebar + main-content) */
+.container {
+    display: flex;
+    flex: 1; /* Permite que el contenedor ocupe el espacio restante */
+    max-width: 1400px; /* Ancho máximo para el contenido principal */
+    margin: 0 auto; /* Centra el contenedor */
+    width: 100%;
+}
+
+/* Sidebar (Menú de Navegación Izquierdo) */
+.sidebar {
+    width: 280px; /* Ancho fijo para el sidebar */
+    background-color: var(--udemy-white);
+    padding: 2rem 1.5rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    position: sticky; /* Fija el sidebar al hacer scroll */
+    top: 66px; /* Ajusta esto si el header tiene altura variable */
+}
+
+.main-nav ul {
+    list-style: none;
+}
+
+.main-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.main-nav a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: var(--udemy-dark-text);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 600;
+    gap: 10px;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background-color: var(--udemy-purple);
+    color: var(--udemy-white);
+}
+
+.main-nav .nav-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--udemy-medium-gray);
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    padding-left: 1rem;
+}
+
+.main-nav .nav-title:first-child {
+    margin-top: 0;
+}
+
+/* Contenido Principal */
+.main-content {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    padding: 2rem;
+    background-color: var(--udemy-light-bg);
+}
+
+.challenge-section {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr; /* Una columna por defecto */
+}
+
+@media (min-width: 992px) {
+    .challenge-section {
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* Dos columnas en pantallas grandes */
+    }
+}
+
+
+.challenge-card {
+    background-color: var(--udemy-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    border: 1px solid var(--udemy-light-bg);
+}
+
+.challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.challenge-header h2 {
+    font-size: 1.6rem;
+    color: var(--udemy-dark-text);
+}
+
+.challenge-difficulty {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--udemy-medium-gray);
+}
+
+.difficulty-level {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--udemy-white);
+}
+
+.difficulty-level.easy {
+    background-color: var(--udemy-green-success);
+}
+
+.difficulty-level.medium {
+    background-color: var(--udemy-orange-medium);
+}
+
+.difficulty-level.hard {
+    background-color: var(--udemy-red-hard);
+}
+
+.challenge-body h3 {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--udemy-dark-text);
+}
+
+.challenge-body p {
+    margin-bottom: 1rem;
+    color: var(--udemy-dark-text);
+}
+
+.challenge-body ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--udemy-dark-text);
+}
+
+.challenge-body pre {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.code-editor {
+    margin-top: 2rem;
+    border: 1px solid var(--udemy-medium-gray);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.code-editor label {
+    display: block;
+    background-color: var(--udemy-light-bg);
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--udemy-medium-gray);
+    color: var(--udemy-dark-text);
+}
+
+.code-editor textarea {
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    background-color: var(--udemy-white);
+    color: var(--udemy-dark-text);
+    resize: vertical;
+    outline: none;
+}
+
+.output-console {
+    background-color: var(--udemy-dark-text);
+    color: var(--udemy-white);
+    padding: 1rem;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--udemy-medium-gray);
+}
+
+.output-console p {
+    margin-bottom: 0.5rem;
+    color: var(--udemy-purple); /* Color para el título de la consola */
+}
+
+.output-console pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+    background-color: transparent; /* Elimina el fondo extra de pre */
+    padding: 0;
+    margin: 0;
+    color: var(--udemy-white);
+}
+
+
+.challenge-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+}
+
+/* Botones Generales */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--udemy-purple);
+    color: var(--udemy-white);
+}
+
+.btn-primary:hover {
+    background-color: #791aab; /* Un tono más oscuro del púrpura */
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--udemy-dark-text);
+    border: 1px solid var(--udemy-dark-text);
+}
+
+.btn-secondary:hover {
+    background-color: var(--udemy-dark-text);
+    color: var(--udemy-white);
+}
+
+/* Botón Flotante de Ayuda */
+.floating-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: var(--udemy-purple);
+    color: var(--udemy-white);
+    padding: 1rem 1.5rem;
+    border-radius: 50px; /* Hace el botón más redondo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.floating-button:hover {
+    transform: translateY(-5px); /* Pequeño efecto de elevación al pasar el mouse */
+    background-color: #791aab; /* Tono más oscuro al pasar el mouse */
+}
+
+.floating-button i {
+    font-size: 1.3rem;
+}
+
+/* Mini Ventana de Chat */
+.chat-window {
+    position: fixed;
+    bottom: 7rem; /* Ajusta la posición para que esté encima del botón flotante */
+    right: 2rem;
+    width: 320px;
+    height: 450px;
+    background-color: var(--udemy-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1001;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chat-window.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none; /* Deshabilita interacciones cuando está oculto */
+}
+
+.chat-header {
+    background-color: var(--udemy-purple);
+    color: var(--udemy-white);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.close-chat-btn {
+    background: none;
+    border: none;
+    color: var(--udemy-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.2rem;
+}
+
+.chat-body {
+    flex-grow: 1;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    overflow-x: hidden;
+}
+
+.chat-body p {
+    margin-bottom: 1rem;
+    color: var(--udemy-dark-text);
+}
+
+.chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.chat-option-btn {
+    background-color: var(--udemy-light-bg);
+    color: var(--udemy-dark-text);
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.chat-option-btn:hover {
+    background-color: #E2E4E6;
+    border-color: var(--udemy-medium-gray);
+}
+
+.chat-option-btn .fas {
+    color: var(--udemy-purple);
+    font-size: 1rem;
+}
+
+.chat-input-area {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto; /* Empuja el área de entrada al final */
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    padding: 0.8rem;
+    border: 1px solid var(--udemy-medium-gray);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.chat-input-area input:focus {
+    border-color: var(--udemy-purple);
+    box-shadow: 0 0 0 2px rgba(164, 53, 240, 0.2);
+}
+
+.chat-input-area .btn-primary {
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .main-nav li {
+        margin-bottom: 0;
+    }
+
+    .main-nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .main-nav .nav-title {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .challenge-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .challenge-difficulty {
+        margin-top: 0.5rem;
+    }
+
+    .floating-button {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .chat-window {
+        width: calc(100% - 2rem); /* Ocupa casi todo el ancho */
+        bottom: 6rem; /* Ajusta la posición para que no choque con el botón */
+        right: 1rem;
+        left: 1rem; /* Centra el chat en móvil */
+        height: 80vh; /* Ocupa más altura en móvil */
+    }
+}
+
+/* Dentro de style.css, añade esto al final o en una sección relevante */
+
+/* Estilos para el estado de búsqueda de tutor */
+.tutor-search-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Para centrar verticalmente si el chat-body lo permite */
+}
+
+.tutor-spinner {
+    font-size: 3rem;
+    color: var(--udemy-purple);
+    margin-bottom: 1rem;
+}
+
+.tutor-search-state p {
+    font-size: 1.1rem;
+    color: var(--udemy-dark-text);
+    margin-bottom: 0.5rem;
+}
+
+.tutor-search-state .small-text {
+    font-size: 0.9rem;
+    color: var(--udemy-medium-gray);
+}
+
+
+/* Estilos para la lista de tutores */
+.tutor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    overflow-y: auto; /* Para permitir scroll si hay muchos tutores */
+    max-height: calc(100% - 80px); /* Ajusta según el padding superior y el input area */
+}
+
+.tutor-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.8rem 1rem;
+    background-color: var(--udemy-light-bg);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.tutor-item:hover {
+    background-color: #eef0f2;
+}
+
+.tutor-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--udemy-purple);
+}
+
+.tutor-name {
+    flex-grow: 1;
+    font-weight: 600;
+    color: var(--udemy-dark-text);
+}
+
+.tutor-contact-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* Estilos para el perfil del tutor */
+.tutor-profile-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--udemy-purple);
+    margin-bottom: 1rem;
+}
+
+.tutor-profile-view h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--udemy-dark-text);
+}
+
+.tutor-expertise {
+    font-size: 0.9rem;
+    color: var(--udemy-medium-gray);
+    margin-bottom: 1rem;
+}
+
+.tutor-bio-review {
+    background-color: var(--udemy-light-bg);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    border: 1px solid #eee;
+    width: 100%;
+}
+
+.tutor-bio-review p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    color: var(--udemy-dark-text);
+}
+
+.tutor-bio-review strong {
+    color: var(--udemy-purple);
+}
+
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+/* Estilos específicos para los botones de contacto en el perfil del tutor */
+.tutor-profile-view .contact-options .chat-option-btn {
+    background-color: var(--udemy-purple); /* Color primario */
+    color: var(--udemy-white);
+    border: 1px solid var(--udemy-purple);
+    text-align: center; /* Centra el texto en el botón */
+}
+
+.tutor-profile-view .contact-options .chat-option-btn:hover {
+    background-color: #791aab; /* Tono más oscuro al pasar el mouse */
+    border-color: #791aab;
+}
+
+.tutor-profile-view .contact-options .chat-option-btn .fas {
+    color: var(--udemy-white); /* Color blanco para los iconos */
+}
+
+
+/* Para los botones de volver */
+.back-to-tutors-btn, .back-to-options-btn {
+    margin-top: 1.5rem;
+    text-align: center;
+    justify-content: center; /* Centra el icono y texto */
+}
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .main-nav li {
+        margin-bottom: 0;
+    }
+
+    .main-nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .main-nav .nav-title {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .challenge-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .challenge-difficulty {
+        margin-top: 0.5rem;
+    }
+
+    .floating-button {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .chat-window {
+        width: calc(100% - 2rem); /* Ocupa casi todo el ancho */
+        bottom: 6rem; /* Ajusta la posición para que no choque con el botón */
+        right: 1rem;
+        left: 1rem; /* Centra el chat en móvil */
+        height: 80vh; /* Ocupa más altura en móvil */
+    }
+}
+
+/* --- Nuevos estilos para el Calendario --- */
+.calendar-view {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--udemy-white);
+}
+
+.calendar-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.calendar-header-controls h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--udemy-dark-text);
+    text-transform: capitalize; /* Para que el nombre del mes sea capitalizado */
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 600;
+    color: var(--udemy-medium-gray);
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.calendar-weekdays span {
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    flex-grow: 1; /* Permite que los días ocupen el espacio restante */
+    overflow-y: auto; /* Scroll si hay demasiados días (raro para un mes, pero previene) */
+    padding-right: 5px; /* Pequeño padding para scrollbar */
+}
+
+.day-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1; /* Mantiene las celdas cuadradas */
+    background-color: var(--udemy-light-bg);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--udemy-dark-text);
+    transition: background-color 0.2s ease, border 0.2s ease;
+}
+
+.day-cell:not(.empty):not(.disabled):hover {
+    background-color: #eef0f2;
+    border: 1px solid var(--udemy-purple);
+}
+
+.day-cell.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+.day-cell.disabled {
+    background-color: #F0F2F5;
+    color: var(--udemy-medium-gray);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.day-cell.selected {
+    background-color: var(--udemy-purple);
+    color: var(--udemy-white);
+    border: 1px solid var(--udemy-purple);
+}
+
+.calendar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.calendar-footer p {
+    margin: 0;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--udemy-dark-text);
+}
+
+.calendar-footer .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* Responsividad básica */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .main-nav li {
+        margin-bottom: 0;
+    }
+
+    .main-nav a {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .main-nav .nav-title {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .challenge-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .challenge-difficulty {
+        margin-top: 0.5rem;
+    }
+
+    .floating-button {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .chat-window {
+        width: calc(100% - 2rem); /* Ocupa casi todo el ancho */
+        bottom: 6rem; /* Ajusta la posición para que no choque con el botón */
+        right: 1rem;
+        left: 1rem; /* Centra el chat en móvil */
+        height: 80vh; /* Ocupa más altura en móvil */
+    }
+}

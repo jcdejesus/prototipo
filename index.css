@@ -935,3 +935,58 @@ header {
         height: 80vh; /* Ocupa más altura en móvil */
     }
 }
+
+/* --- Estilos para el Banner de Notificación --- */
+.notification-banner {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Ancho automático para ajustarse al contenido */
+    max-width: 90%; /* Máximo ancho del 90% del viewport */
+    padding: 1rem 1.5rem;
+    margin-top: 1rem; /* Espacio desde la parte superior */
+    border-radius: 8px;
+    color: var(--udemy-white);
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 2000; /* Asegura que esté por encima de todo */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.notification-banner.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px); /* Se esconde ligeramente hacia arriba */
+    pointer-events: none; /* Deshabilita clics cuando está oculto */
+}
+
+/* Tipos de banners */
+.notification-banner.success {
+    background-color: var(--udemy-green-success); /* Verde para éxito */
+}
+
+.notification-banner.error {
+    background-color: var(--udemy-red-hard); /* Rojo para error */
+}
+
+.notification-banner.info {
+    background-color: #42b883; /* Azul para información general */
+}
+
+.chat-header-tutor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.tutor-chat-photo {
+    width:100px;
+    height: 100px;;
+}
+
+.tutor-name {
+    font-weight: 600;
+}

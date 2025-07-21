@@ -41,28 +41,44 @@
             <section class="challenge-section">
                 <article class="challenge-card">
                     <header class="challenge-header">
-                        <h2>Reto del Día: Calcular el Factorial</h2>
-                        <span class="challenge-difficulty">Dificultad: <span class="difficulty-level easy">Fácil</span></span>
+                        <h2>Reto del Día: Minimum Window Substring</h2>
+                        <span class="challenge-difficulty">Dificultad: <span class="difficulty-level easy">Medio</span></span>
                     </header>
                     <div class="challenge-body">
                         <h3>Descripción del Problema:</h3>
-                        <p>Escribe una función que calcule el factorial de un número entero no negativo 'n'. El factorial de 'n' (representado como n!) es el producto de todos los enteros positivos menores o iguales que 'n'. Por ejemplo, 5! = 5 * 4 * 3 * 2 * 1 = 120.</p>
+                        <p>Dado un string s y un string objetivo t, encuentra el substring más corto en s que contenga todas las palabras (no caracteres) de t, en cualquier orden, al menos una vez cada una.
+
+                            Tanto s como t contienen palabras separadas por espacios.
+                            
+                            Debes devolver la subcadena original de s, no solo las palabras reordenadas.
+                            
+                            Si no existe tal substring, devuelve una cadena vacía.</p>
 
                         <h3>Ejemplos:</h3>
-                        <pre><code>factorial(0)  // 1
-factorial(1)  // 1
-factorial(5)  // 120
-factorial(7)  // 5040</code></pre>
+                        <pre><code>Input:
+                            s = "this is a test string that is just a test"
+                            t = "test is a"
+                            
+                            Output:
+                            "is a test"
+                            
+                            Input:
+                            s = "practice makes perfect coding makes practice perfect"
+                            t = "makes perfect practice"
+                            
+                            Output:
+                            "practice makes perfect"</code></pre>
 
                         <h3>Consideraciones:</h3>
                         <ul>
-                            <li>El número de entrada 'n' siempre será un entero no negativo.</li>
-                            <li>Para 'n = 0', el factorial es 1 por definición.</li>
+                            <li>1 <= len(s), len(t) <= 10^4 (¡sí, cadenas largas!)</li>
+                            <li>Palabras pueden repetirse en t, y deben aparecer al menos ese número de veces en el substring.</li>
+                            <li>La solución debe ser O(n) o lo más cercana posible </li>
                         </ul>
 
                         <div class="code-editor">
                             <label for="code-input">Tu Código Aquí:</label>
-                            <textarea id="code-input" rows="10" placeholder="function factorial(n) {&#10;  // Escribe tu código aquí&#10;}"></textarea>
+                            <textarea id="code-input" rows="10" placeholder="Escribe tu código aquí"></textarea>
                             <button class="btn btn-primary" id="run-code">Ejecutar Código</button>
                             <div class="output-console" id="output-console">
                                 <p>Consola de Salida:</p>
@@ -101,6 +117,9 @@ factorial(7)  // 5040</code></pre>
                 <button class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
+    </div>
+
+    <div id="notificationBanner" class="notification-banner hidden">
     </div>
 
     <script src="./index.js"></script>

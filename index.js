@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (runCodeButton && codeInput && codeOutput) {
         runCodeButton.addEventListener('click', () => {
             const userCode = codeInput.value;
-            codeOutput.textContent = 'Ejecutando su código...\n';
+            codeOutput.textContent = 'Salida de su código...\n';
 
             try {
                 const testCases = [0, 1, 5, 7];
@@ -21,32 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 eval(userCode);
 
-                if (typeof factorial !== 'function') {
-                    factorial = (n) => {
-                        if (n === 0) return 1;
-                        let result = 1;
-                        for (let i = 1; i <= n; i++) {
-                            result *= i;
-                        }
-                        return result;
-                    };
-                }
-
-                testCases.forEach(num => {
-                    logs.length = 0;
-                    const result = factorial(num);
-                    output += `factorial(${num}) = ${result}\n`;
-                    if (logs.length > 0) {
-                        output += `   (console.log: ${logs.join('; ')})\n`;
-                    }
-                });
-
-                codeOutput.textContent = output;
                 console.log = originalConsoleLog;
 
             } catch (error) {
                 codeOutput.textContent = `Error de Ejecución: ${error.message}\n${error.stack}`;
                 console.log = originalConsoleLog;
+                showBannerNotification('Ha ocurrido un error al ejecutar su código. Por favor, revise la consola.', 'error');
             }
         });
     }
@@ -92,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedOptionText.includes('Tutor Express')) {
             showFindingTutor();
         } else {
-            alert(`Has seleccionado: ${selectedOptionText}. En una aplicación real, esto abriría la funcionalidad correspondiente.`);
+            showBannerNotification(`Estamos trabajando duro para poder ofrecerte "${selectedOptionText}". Pronto disfrutarás de nuestros servicios.`, 'info');
         }
     }
 
@@ -112,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             name: "Juan Perez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=JP",
+            photo:  "https://i.pravatar.cc/150?img=68",
             profilePic: "https://i.pravatar.cc/150?img=68", // Una URL de avatar más grande
             expertise: "Algoritmos, Estructuras de Datos, Python",
             bio: "Ingeniero de software con más de 10 años de experiencia en desarrollo back-end. Apasionado por la resolución de problemas complejos y la enseñanza de principios de computación.",
@@ -121,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 2,
             name: "Maria Garcia",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=MG",
+            photo: "https://i.pravatar.cc/150?img=43",
             profilePic: "https://i.pravatar.cc/150?img=43",
             expertise: "Lógica Computacional, C++, Desarrollo Web",
             bio: "Desarrolladora full-stack con experiencia en la industria financiera. Experta en lógica computacional y en la creación de soluciones eficientes. Disfruto guiando a los estudiantes en sus primeros pasos.",
@@ -130,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 3,
             name: "Carlos Sanchez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=CS",
+            photo: "https://i.pravatar.cc/150?img=30",
             profilePic: "https://i.pravatar.cc/150?img=30",
             expertise: "Bases de Datos, SQL, Arquitectura de Software",
             bio: "Arquitecto de soluciones con un profundo conocimiento en diseño de bases de datos y sistemas distribuidos. Mi objetivo es que comprendas no solo el 'cómo', sino el 'porqué'.",
@@ -139,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 4,
             name: "Ana Lopez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=AL",
+            photo: "https://i.pravatar.cc/150?img=25",
             profilePic: "https://i.pravatar.cc/150?img=25",
             expertise: "JavaScript, React, Front-end",
             bio: "Diseñadora y desarrolladora front-end con pasión por crear interfaces de usuario intuitivas y responsivas. Me encanta compartir mi conocimiento sobre las últimas tendencias de la web.",
@@ -148,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 5,
             name: "Pedro Ramirez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=PR",
+            photo: "https://i.pravatar.cc/150?img=19",
             profilePic: "https://i.pravatar.cc/150?img=19",
             expertise: "Inteligencia Artificial, Machine Learning, Java",
             bio: "Investigador en IA y científico de datos. Con experiencia en algoritmos de aprendizaje automático y su aplicación en problemas reales. Te guiaré a través del fascinante mundo de la IA.",
@@ -232,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (actionText.includes('Agendar Sesión')) {
                     showCalendarForScheduling(selectedTutor);
                 } else {
-                    alert(`Iniciando ${actionText} con ${selectedTutor.name}. (Simulación)`);
+                    showBannerNotification(`Iniciando ${actionText} con ${selectedTutor.name}. (Simulación)`, 'info');
                 }
             });
         });
@@ -245,9 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chatBody.innerHTML = `
             <div class="chat-main-view">
                 <div class="chat-header-tutor">
-                    <button class="btn-icon back-to-profile-btn"><i class="fas fa-arrow-left"></i></button>
                     <img src="${tutor.photo}" alt="${tutor.name}" class="tutor-chat-photo">
-                    <span>${tutor.name}</span>
+                    <span class="tutor-name">${tutor.name}</span>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message tutor-message">
@@ -357,11 +336,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         confirmSessionBtn.addEventListener('click', () => {
             if (selectedSchedulingDate) {
-                alert(`Has agendado una sesión con ${tutor.name} el ${selectedSchedulingDate.toLocaleDateString()}. (Simulación)`);
+                showBannerNotification(`Has agendado una sesión con ${tutor.name} para el ${selectedSchedulingDate.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}. ¡Revisa tu correo para los detalles!`, 'success');
                 // Aquí iría la lógica para enviar la sesión agendada a un backend
                 showTutorProfile(tutor); // Volver al perfil del tutor después de confirmar
             } else {
-                alert('Por favor, selecciona una fecha para agendar la sesión.');
+                showBannerNotification('Por favor, selecciona una fecha válida para agendar la sesión.', 'error');
             }
         });
 
@@ -400,10 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
             dayCell.textContent = day;
 
             const currentDate = new Date();
+            // Normalizar `currentDate` a solo la fecha (sin tiempo) para comparación
+            const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
             const fullDate = new Date(year, month, day);
 
             // Deshabilitar fechas pasadas
-            if (fullDate < new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())) {
+            if (fullDate < today) {
                 dayCell.classList.add('disabled');
             } else {
                 dayCell.addEventListener('click', () => {
@@ -442,6 +423,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    // --- Funcionalidad del Banner de Notificación ---
+    const notificationBanner = document.getElementById('notificationBanner');
+    let bannerTimeout;
+
+    function showBannerNotification(message, type = 'info', duration = 4000) {
+        // Limpiar cualquier timeout anterior para que el nuevo banner aparezca inmediatamente
+        clearTimeout(bannerTimeout);
+
+        notificationBanner.textContent = message;
+        notificationBanner.className = 'notification-banner'; // Resetear clases
+        notificationBanner.classList.add(type); // Añadir clase de tipo (success, error, info)
+        notificationBanner.classList.remove('hidden'); // Mostrar el banner
+
+        // Ocultar el banner después de la duración especificada
+        bannerTimeout = setTimeout(() => {
+            notificationBanner.classList.add('hidden');
+        }, duration);
+    }
+
 
     // Simular clics en el menú de navegación para mostrar "activo"
     const navLinks = document.querySelectorAll('.main-nav a');
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
             // event.preventDefault(); // Descomentar si quieres evitar que la página se recargue
-            alert(`Simulando navegación a: ${this.textContent.trim()}. En una aplicación real, aquí se cargaría el contenido.`);
+            showBannerNotification(`Estamos trabajando duro para poder ofrecerte "${this.textContent.trim()}". Pronto disfrutarás de nuestros servicios.`, 'info');
         });
     });
 });

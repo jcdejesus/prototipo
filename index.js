@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedOptionText.includes('Tutor Express')) {
             showFindingTutor();
         } else {
-            showBannerNotification(`Has seleccionado: "${selectedOptionText}". En una aplicación real, esto abriría la funcionalidad correspondiente.`, 'info');
+            showBannerNotification(`No disponible - Estamos trabajando duro para que puedas acceder a "${selectedOptionText}".`, 'error');
         }
     }
 
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             name: "Juan Perez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=JP",
+            photo: "https://i.pravatar.cc/150?img=68",
             profilePic: "https://i.pravatar.cc/150?img=68", // Una URL de avatar más grande
             expertise: "Algoritmos, Estructuras de Datos, Python",
             bio: "Ingeniero de software con más de 10 años de experiencia en desarrollo back-end. Apasionado por la resolución de problemas complejos y la enseñanza de principios de computación.",
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 2,
             name: "Maria Garcia",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=MG",
+            photo: "https://i.pravatar.cc/150?img=43",
             profilePic: "https://i.pravatar.cc/150?img=43",
             expertise: "Lógica Computacional, C++, Desarrollo Web",
             bio: "Desarrolladora full-stack con experiencia en la industria financiera. Experta en lógica computacional y en la creación de soluciones eficientes. Disfruto guiando a los estudiantes en sus primeros pasos.",
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 3,
             name: "Carlos Sanchez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=CS",
+            photo: "https://i.pravatar.cc/150?img=30",
             profilePic: "https://i.pravatar.cc/150?img=30",
             expertise: "Bases de Datos, SQL, Arquitectura de Software",
             bio: "Arquitecto de soluciones con un profundo conocimiento en diseño de bases de datos y sistemas distribuidos. Mi objetivo es que comprendas no solo el 'cómo', sino el 'porqué'.",
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 4,
             name: "Ana Lopez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=AL",
+            photo: "https://i.pravatar.cc/150?img=25",
             profilePic: "https://i.pravatar.cc/150?img=25",
             expertise: "JavaScript, React, Front-end",
             bio: "Diseñadora y desarrolladora front-end con pasión por crear interfaces de usuario intuitivas y responsivas. Me encanta compartir mi conocimiento sobre las últimas tendencias de la web.",
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 5,
             name: "Pedro Ramirez",
-            photo: "https://via.placeholder.com/60/A435F0/FFFFFF?text=PR",
+            photo: "https://i.pravatar.cc/150?img=19",
             profilePic: "https://i.pravatar.cc/150?img=19",
             expertise: "Inteligencia Artificial, Machine Learning, Java",
             bio: "Investigador en IA y científico de datos. Con experiencia en algoritmos de aprendizaje automático y su aplicación en problemas reales. Te guiaré a través del fascinante mundo de la IA.",
@@ -516,12 +516,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simular clics en el menú de navegación para mostrar "activo"
     const navLinks = document.querySelectorAll('.main-nav a');
-    navLinks.forEach(link => {
+    navLinks.forEach((link, index) => {
+        if (index === 0){
+            return;
+        }
         link.addEventListener('click', function(event) {
             navLinks.forEach(nav => nav.classList.remove('active'));
             this.classList.add('active');
             // event.preventDefault(); // Descomentar si quieres evitar que la página se recargue
-            showBannerNotification(`Navegando a: "${this.textContent.trim()}". Esta es una simulación.`, 'info');
+            showBannerNotification(`Estamos trabajando duro para que puedas acceder a "${this.textContent.trim()}".`, 'info');
         });
     });
 });
